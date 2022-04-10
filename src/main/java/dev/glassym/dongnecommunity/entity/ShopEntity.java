@@ -1,6 +1,8 @@
 package dev.glassym.dongnecommunity.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "shop")
@@ -29,6 +31,11 @@ public class ShopEntity {
     )
     @JoinColumn(name = "category")
     private CategoryEntity category;
+
+    @OneToMany(
+            fetch = FetchType.LAZY
+    )
+    private List<ShopPostEntity> shopPostEntityList = new ArrayList<>();
 
     public ShopEntity() {
     }
@@ -79,5 +86,9 @@ public class ShopEntity {
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
+    }
+
+    public List<ShopPostEntity> getShopPostEntityList() {
+        return shopPostEntityList;
     }
 }
